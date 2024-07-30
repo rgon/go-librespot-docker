@@ -1,0 +1,17 @@
+services:
+  librespot:
+    container_name: librespot
+    build: 
+      context: ./go-librespot-docker/
+      dockerfile: Dockerfile
+    volumes:
+      - /usr/share/alsa:/usr/share/alsa
+      - ./config.yml:/usr/bin/go-librespot/config.yml
+      - ./credentials:/usr/bin/go-librespot/credentials/
+    network_mode: host
+    devices:
+      - "/dev/snd:/dev/snd"
+    restart: unless-stopped
+
+volumes:
+  go-librespot-credentials:
